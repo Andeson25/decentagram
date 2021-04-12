@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/decentagram/static/css/main.d4476d92.chunk.css",
-    "main.js": "/decentagram/static/js/main.43ddfb3b.chunk.js",
-    "main.js.map": "/decentagram/static/js/main.43ddfb3b.chunk.js.map",
+    "main.js": "/decentagram/static/js/main.a4483411.chunk.js",
+    "main.js.map": "/decentagram/static/js/main.a4483411.chunk.js.map",
     "runtime-main.js": "/decentagram/static/js/runtime-main.e5b9decb.js",
     "runtime-main.js.map": "/decentagram/static/js/runtime-main.e5b9decb.js.map",
     "static/js/2.5b0b0f70.chunk.js": "/decentagram/static/js/2.5b0b0f70.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.e5b9decb.js",
     "static/js/2.5b0b0f70.chunk.js",
     "static/css/main.d4476d92.chunk.css",
-    "static/js/main.43ddfb3b.chunk.js"
+    "static/js/main.a4483411.chunk.js"
   ]
 }
