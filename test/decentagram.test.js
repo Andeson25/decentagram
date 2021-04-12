@@ -1,3 +1,4 @@
+/* eslint-disable no-undef,jest/valid-describe */
 const Decentagram = artifacts.require('./Decentagram');
 
 require('chai')
@@ -12,7 +13,7 @@ const getBalance = async author => {
 
 contract('Decentagram', ([deployer, author, tipper]) => {
     let decentagram;
-    before(async () => {
+    beforeEach(async () => {
         decentagram = await Decentagram.deployed();
     });
 
@@ -36,7 +37,7 @@ contract('Decentagram', ([deployer, author, tipper]) => {
             description = 'Post description';
         let result, postCount;
 
-        before(async () => {
+        beforeEach(async () => {
             result = await decentagram.createPost(
                 postHash,
                 description,
