@@ -7,47 +7,62 @@ import {EthereumService} from '../services/ethereum.service';
 import {DecentagramContract} from '../models/decentagram.contract';
 
 export function MainComponent(): FunctionComponentElement<any> {
-    const ethereumService: EthereumService = useMemo(() => EthereumService.getInstance(), []);
     const [account, setAccount]: UseState<string> = useState('');
-    const [error, setError]: UseState<Error> = useState(null);
-    const [chain, setChain]: UseState<string> = useState('');
-    const decentagramContract: DecentagramContract = useMemo(
-        () => {
+    const [network, setNetwork]: UseState<string> = useState('');
+    const [balance, setBalance]: UseState<number> = useState(0);
+
+    const ethereumService: EthereumService = useMemo(() => EthereumService.getInstance(), []);
+    const decentagramContract: DecentagramContract = useMemo(() => {
             try {
                 return ethereumService.contractFactory(DecentagramContract);
             } catch (e) {
-                setError(e);
+                return null;
             }
-        }, [ethereumService]);
+        },
+        [ethereumService]
+    );
 
     useEffect(() => {
-        const subscription: Subscription = ethereumService.chain
-            .pipe(withLatestFrom(ethereumService.account))
-            .subscribe(([chain, account]: [string, string]) => {
-                setChain(chain);
+        const subscription: Subscription = ethereumService.account
+            .pipe(withLatestFrom(ethereumService.network, ethereumService.balance))
+            .subscribe(([account, network, balance]: [string, string, number]) => {
                 setAccount(account);
+                setNetwork(network);
+                setBalance(balance);
             });
         return () => {
             subscription.unsubscribe();
         };
     });
 
-    if (error && !decentagramContract) {
+    const getContractActions = () => {
+        if (!decentagramContract) {
+            return (
+                <div className="row  justify-content-center">
+                    Decentagram contract not deployed to detected network.
+                </div>
+            );
+        }
+
         return (
             <div className="row  justify-content-center">
-                {error.message}
+                Good
             </div>
         );
-    }
+    };
 
     return (
         <Fragment>
             <div className="row  justify-content-center">
-                Chain:{chain}
+                Network: {network}
             </div>
             <div className="row  justify-content-center">
                 Account: {account}
             </div>
+            <div className="row  justify-content-center">
+                Balance: {balance} ETH
+            </div>
+            {getContractActions()}
         </Fragment>
     );
 }

@@ -5,11 +5,11 @@ import {EthereumService} from '../services/ethereum.service';
 import {isMetaMaskInstalled} from '../helpers/meta-mask.helper';
 import {UseState} from '../models/helper-types/use-state.type';
 import {MainComponent} from './main.component';
-import {NetworkNameType, NetworkType} from '../enums/network-type.enum';
 
 export function AppComponent(): FunctionComponentElement<any> {
-    const ethereumService: EthereumService = useMemo(() => EthereumService.getInstance(), []);
     const [loading, setLoading]: UseState<boolean> = useState(true);
+
+    const ethereumService: EthereumService = useMemo(() => EthereumService.getInstance(), []);
 
     useEffect(() => {
         const subscription: Subscription = ethereumService.isReady
@@ -33,15 +33,6 @@ export function AppComponent(): FunctionComponentElement<any> {
         return (
             <div className="container bg-light my-5 px-5 py-3 text-center">
                 Loading...
-            </div>
-        );
-    }
-
-
-    if (!ethereumService.isTestNetwork) {
-        return (
-            <div className="container bg-light my-5 px-5 py-3 text-center">
-                Please Select {NetworkNameType[NetworkType.Ropsten]} Network
             </div>
         );
     }
