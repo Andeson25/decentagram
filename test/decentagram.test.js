@@ -1,4 +1,4 @@
-/* eslint-disable no-undef,jest/valid-describe */
+/* eslint-disable no-undef, jest/valid-describe */
 const Decentagram = artifacts.require('./Decentagram');
 
 require('chai')

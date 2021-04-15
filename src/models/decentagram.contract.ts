@@ -12,7 +12,7 @@ export class DecentagramContract extends BaseContract {
         }
 
         const abi: AbiItem[] = DecentagramJSON.abi as AbiItem[];
-        const address: string = DecentagramJSON.networks[network];
+        const address: string = DecentagramJSON.networks[network] && DecentagramJSON.networks[network].address;
         if (address && abi) {
             super(abi, address);
         } else {

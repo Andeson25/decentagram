@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import {provider} from 'web3-core';
+import {IpcProvider} from 'web3-core';
 import {Contract} from 'web3-eth-contract';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 
@@ -9,7 +9,7 @@ import {BaseContract} from '../models/base.contract';
 
 export class EthereumService {
     public static instance: EthereumService;
-    private readonly ETHEREUM: any;
+    private readonly ETHEREUM: IpcProvider & any;
     private readonly WEB3: Web3;
 
     private _account: BehaviorSubject<string> = new BehaviorSubject(undefined);
@@ -36,7 +36,7 @@ export class EthereumService {
         return this._isReady.asObservable();
     }
 
-    constructor(ethereum: provider) {
+    constructor(ethereum: IpcProvider) {
         if (isMetaMaskInstalled()) {
             this.ETHEREUM = ethereum;
             this.WEB3 = new Web3(this.ETHEREUM);
@@ -49,13 +49,17 @@ export class EthereumService {
     }
 
     public static getContractConstructor(): Constructor<Contract> {
-        return EthereumService.getInstance().WEB3.eth.Contract;
+        if (isMetaMaskInstalled()) {
+            return EthereumService.getInstance().WEB3.eth.Contract;
+        } else {
+            return null;
+        }
     };
 
     public static getInstance(): EthereumService {
         if (isMetaMaskInstalled()) {
             if (!EthereumService.instance) {
-                EthereumService.instance = new EthereumService(window['ethereum'] as provider);
+                EthereumService.instance = new EthereumService(window['ethereum'] as IpcProvider);
             }
             return EthereumService.instance;
         } else {
