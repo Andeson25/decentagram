@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/decentagram/static/css/main.d4476d92.chunk.css",
-    "main.js": "/decentagram/static/js/main.34e271df.chunk.js",
-    "main.js.map": "/decentagram/static/js/main.34e271df.chunk.js.map",
+    "main.js": "/decentagram/static/js/main.c0e40183.chunk.js",
+    "main.js.map": "/decentagram/static/js/main.c0e40183.chunk.js.map",
     "runtime-main.js": "/decentagram/static/js/runtime-main.e5b9decb.js",
     "runtime-main.js.map": "/decentagram/static/js/runtime-main.e5b9decb.js.map",
-    "static/js/2.0e3c54b8.chunk.js": "/decentagram/static/js/2.0e3c54b8.chunk.js",
-    "static/js/2.0e3c54b8.chunk.js.map": "/decentagram/static/js/2.0e3c54b8.chunk.js.map",
+    "static/js/2.42133489.chunk.js": "/decentagram/static/js/2.42133489.chunk.js",
+    "static/js/2.42133489.chunk.js.map": "/decentagram/static/js/2.42133489.chunk.js.map",
     "index.html": "/decentagram/index.html",
     "static/css/main.d4476d92.chunk.css.map": "/decentagram/static/css/main.d4476d92.chunk.css.map",
-    "static/js/2.0e3c54b8.chunk.js.LICENSE.txt": "/decentagram/static/js/2.0e3c54b8.chunk.js.LICENSE.txt"
+    "static/js/2.42133489.chunk.js.LICENSE.txt": "/decentagram/static/js/2.42133489.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e5b9decb.js",
-    "static/js/2.0e3c54b8.chunk.js",
+    "static/js/2.42133489.chunk.js",
     "static/css/main.d4476d92.chunk.css",
-    "static/js/main.34e271df.chunk.js"
+    "static/js/main.c0e40183.chunk.js"
   ]
 }
