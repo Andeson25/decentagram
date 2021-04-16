@@ -1,14 +1,19 @@
+import {Fragment, FunctionComponentElement, useEffect, useMemo, useState} from 'react';
 import {Subscription} from 'rxjs';
-import {FunctionComponentElement, useEffect, useMemo, useState} from 'react';
+import {withLatestFrom} from 'rxjs/operators';
 import Onboarding from '@metamask/onboarding';
 
 import {EthereumService} from '../services/ethereum.service';
 import {isMetaMaskInstalled} from '../helpers/meta-mask.helper';
 import {UseState} from '../models/helper-types/use-state.type';
 import {MainComponent} from './main.component';
+import {HeaderComponent} from './header.component';
 
 export function AppComponent(): FunctionComponentElement<any> {
     const [loading, setLoading]: UseState<boolean> = useState(true);
+    const [account, setAccount]: UseState<string> = useState();
+    const [network, setNetwork]: UseState<string> = useState();
+    const [balance, setBalance]: UseState<number> = useState();
 
     const ethereumService: EthereumService = useMemo(() => {
         try {
@@ -21,7 +26,17 @@ export function AppComponent(): FunctionComponentElement<any> {
     useEffect(() => {
         if (ethereumService) {
             const subscription: Subscription = ethereumService.isReady
-                .subscribe((isReady: boolean) => {
+                .pipe(
+                    withLatestFrom(
+                        ethereumService.account,
+                        ethereumService.network,
+                        ethereumService.balance
+                    )
+                )
+                .subscribe(([isReady, account, network, balance]: [boolean, string, string, number]) => {
+                    setAccount(account);
+                    setNetwork(network);
+                    setBalance(balance);
                     setLoading(!isReady);
                 });
             return () => {
@@ -49,16 +64,17 @@ export function AppComponent(): FunctionComponentElement<any> {
     if (loading) {
         return (
             <div className="container bg-light my-5 px-5 py-3 text-center">
-                <div className="spinner-border"></div>
+                <div className="spinner-border"/>
             </div>
         );
     }
 
     return (
-        <div className="py-5">
-            <div className="container bg-light py-5 text-center">
+        <Fragment>
+            <HeaderComponent account={account} network={network} balance={balance}/>
+            <div className="py-5">
                 <MainComponent/>
             </div>
-        </div>
+        </Fragment>
     );
 }
