@@ -5,6 +5,8 @@ import {isMetaMaskInstalled} from '../helpers/meta-mask.helper';
 
 import DecentagramJSON from '../abis/Decentagram.json';
 
+const address = '0x6065C2274830F5261B262Ea7bBE65Ca2B9c11151'
+
 export class DecentagramContract extends BaseContract {
     constructor(network: string) {
         if (!isMetaMaskInstalled()) {
@@ -12,7 +14,7 @@ export class DecentagramContract extends BaseContract {
         }
 
         const abi: AbiItem[] = DecentagramJSON.abi as AbiItem[];
-        const address: string = DecentagramJSON.networks[network] && DecentagramJSON.networks[network].address;
+        // const address: string = DecentagramJSON.networks[network] && DecentagramJSON.networks[network].address;
         if (address && abi) {
             super(abi, address);
         } else {
